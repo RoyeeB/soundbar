@@ -20,8 +20,10 @@ It provides a modern, touch-friendly UI for playing, seeking, and visualizing au
 ## 📷 Screenshots & Video
 
 ### 📸 Screenshots
-![image](https://github.com/user-attachments/assets/e53f913c-5d36-4bd5-9810-428c95c1e27f)
+![image](https://github.com/user-attachments/assets/988f507d-c07d-4b25-a2d0-1820576cd33a)
 ![image](https://github.com/user-attachments/assets/0b56d1bb-2aa1-4d4b-b01b-be3423b601c1)
+![image](https://github.com/user-attachments/assets/7108ad7d-ed95-4092-8c5a-a1e6ae3e8367)
+
 
 
 ### 🎥 Demo Video
