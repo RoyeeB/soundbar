@@ -129,9 +129,3 @@ You can use this demo to learn how to connect the library with your own `MediaPl
 
 ---
 
-## 👨‍💻 Author
-
-Made with ❤️ by **Roee**  
-Final-year software engineering student & Android enthusiast.
-
-[LinkedIn](#) • [GitHub](#) • [Portfolio](#)
