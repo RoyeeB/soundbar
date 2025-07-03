@@ -4,6 +4,7 @@ import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.widget.Button;
+import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -17,32 +18,44 @@ public class MainActivity extends AppCompatActivity {
     private Runnable updateRunnable;
     private boolean isPlaying = false;
 
+    private int[] songResIds = {R.raw.mysong, R.raw.mysong2, R.raw.mysong3};
+    private String[] songNames = {"MC Menor JP - Menina de Vermlho", "Bad Bunny - Te Bote", "Sia - Unstoppable"};
+    private int currentSongIndex = 0;
+
+    private Button playPauseBtn;
+    private SongAdapter adapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         soundBarView = findViewById(R.id.soundBarView);
-        Button playPauseBtn = findViewById(R.id.playButton);
+        playPauseBtn = findViewById(R.id.playButton);
+        ListView songListView = findViewById(R.id.songList);
 
-        // טעינת הקובץ WAV מ־res/raw
-        soundBarView.loadAudioResource(this, R.raw.mysong3);
+        adapter = new SongAdapter(this, songNames);
+        songListView.setAdapter(adapter);
 
-        // הכנת MediaPlayer
-        mediaPlayer = MediaPlayer.create(this, R.raw.mysong3);
+        songListView.setOnItemClickListener((parent, view, position, id) -> {
+            currentSongIndex = position;
+            adapter.setPlayingIndex(position);
+            playSelectedSong();
+        });
 
         playPauseBtn.setOnClickListener(v -> {
-            if (mediaPlayer.isPlaying()) {
-                mediaPlayer.pause();
-                isPlaying = false;
-            } else {
-                mediaPlayer.start();
-                isPlaying = true;
-                startUpdating();
+            if (mediaPlayer != null) {
+                if (mediaPlayer.isPlaying()) {
+                    mediaPlayer.pause();
+                    isPlaying = false;
+                } else {
+                    mediaPlayer.start();
+                    isPlaying = true;
+                    startUpdating();
+                }
             }
         });
 
-        // תמיכה בגרירה על הסאונדבר
         soundBarView.setOnSeekListener(percent -> {
             if (mediaPlayer != null && soundBarView.getTotalBars() > 0) {
                 int seekTo = (int) (mediaPlayer.getDuration() * percent);
@@ -50,8 +63,23 @@ public class MainActivity extends AppCompatActivity {
                 soundBarView.setPlayedBars((int) (percent * soundBarView.getTotalBars()));
             }
         });
+    }
 
-        // הפסקת עדכון כאשר השיר נגמר
+    private void playSelectedSong() {
+        if (mediaPlayer != null) {
+            mediaPlayer.stop();
+            mediaPlayer.release();
+            mediaPlayer = null;
+            handler.removeCallbacks(updateRunnable);
+        }
+
+        int resId = songResIds[currentSongIndex];
+        soundBarView.loadAudioResource(this, resId);
+        mediaPlayer = MediaPlayer.create(this, resId);
+        mediaPlayer.start();
+        isPlaying = true;
+        startUpdating();
+
         mediaPlayer.setOnCompletionListener(mp -> {
             isPlaying = false;
             handler.removeCallbacks(updateRunnable);

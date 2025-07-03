@@ -1,52 +1,68 @@
-<!--<?xml version="1.0" encoding="utf-8"?>-->
-<!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
-<!--    xmlns:app="http://schemas.android.com/apk/res-auto"-->
-<!--    android:orientation="vertical"-->
-<!--    android:gravity="center"-->
-<!--    android:padding="16dp"-->
-<!--    android:layout_width="match_parent"-->
-<!--    android:layout_height="match_parent">-->
-
-<!--    <com.example.soundbarlib.SoundBarPlayerView-->
-<!--        android:id="@+id/soundBarView"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="100dp"-->
-<!--        android:layout_marginBottom="24dp" />-->
-
-<!--    <Button-->
-<!--        android:id="@+id/playPauseButton"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:text="Play / Pause" />-->
-
-<!--</LinearLayout>-->
-
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <!-- כותרת -->
+    <TextView
+        android:id="@+id/playlistTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="My Playlist 🎧"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textColor="#000000"
+        android:layout_marginTop="24dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- רשימת שירים -->
+    <ListView
+        android:id="@+id/songList"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintTop_toBottomOf="@id/playlistTitle"
+        app:layout_constraintBottom_toTopOf="@+id/soundBarView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- SoundBar -->
     <com.example.soundbarlib.SoundBarPlayerView
         android:id="@+id/soundBarView"
         android:layout_width="0dp"
-        android:layout_height="200dp"
-        app:layout_constraintTop_toTopOf="parent"
+        android:layout_height="120dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintTop_toBottomOf="@id/songList"
         app:layout_constraintBottom_toTopOf="@+id/playButton"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHeight_percent="0.4"
-        android:layout_margin="16dp" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <Button
         android:id="@+id/playButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Play / Pause"
+        android:text="▶ Play / Pause"
+        android:textColor="#000000"
+        android:paddingStart="24dp"
+        android:backgroundTint="#39A9E4"
+        android:paddingEnd="24dp"
+        android:paddingTop="12dp"
+        android:paddingBottom="12dp"
+        android:textStyle="bold"
+        android:layout_marginBottom="32dp"
+        android:elevation="4dp"
         app:layout_constraintTop_toBottomOf="@id/soundBarView"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp" />
+         />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
-
