@@ -1,0 +1,7 @@
+<resources>
+    <declare-styleable name="SoundBarPlayerView">
+        <attr name="barColor" format="color" />
+        <attr name="progressColor" format="color" />
+        <attr name="barWidth" format="dimension" />
+    </declare-styleable>
+</resources>
