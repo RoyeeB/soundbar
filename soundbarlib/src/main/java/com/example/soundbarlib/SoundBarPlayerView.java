@@ -26,7 +26,7 @@ public class SoundBarPlayerView extends View {
     private float durationInSeconds = 0f;
     private boolean isSeeking = false;
     private float seekX = 0f;
-    private int barColor = Color.parseColor("#00E676"); // ברירת מחדל
+    private int barColor = Color.parseColor("#00E676");
 
     public interface OnSeekListener {
         void onSeekTo(float percent);
@@ -58,7 +58,7 @@ public class SoundBarPlayerView extends View {
 
         glowPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         glowPaint.setStyle(Paint.Style.FILL);
-        glowPaint.setColor(applyAlpha(barColor, 0.27f)); // glow מתוך אותו צבע
+        glowPaint.setColor(applyAlpha(barColor, 0.27f));
         glowPaint.setMaskFilter(new BlurMaskFilter(10, BlurMaskFilter.Blur.NORMAL));
 
         timePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
@@ -157,7 +157,6 @@ public class SoundBarPlayerView extends View {
             canvas.drawRoundRect(left, top, left + barWidth, bottom, 6f, 6f, backgroundPaint);
         }
 
-        // Gradient צבעוני לפי הצבע שנבחר
         LinearGradient gradient = new LinearGradient(
                 0, 0, width, 0,
                 new int[]{

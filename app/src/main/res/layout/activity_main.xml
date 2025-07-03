@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!-- כותרת -->
+
     <TextView
         android:id="@+id/playlistTitle"
         android:layout_width="wrap_content"
@@ -18,7 +18,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- רשימת שירים -->
+
     <ListView
         android:id="@+id/songList"
         android:layout_width="0dp"
@@ -75,8 +75,6 @@
     </LinearLayout>
 
 
-
-    <!-- SoundBar -->
     <com.example.soundbarlib.SoundBarPlayerView
         android:id="@+id/soundBarView"
         android:layout_width="0dp"

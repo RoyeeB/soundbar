@@ -53,10 +53,10 @@ public class SongAdapter extends BaseAdapter {
         textView.setText(songNames[position]);
 
         if (position == playingIndex) {
-            view.setBackgroundColor(0xFFE0E0E0); // תכלת
+            view.setBackgroundColor(0xFFE0E0E0);
             icon.setVisibility(View.VISIBLE);
         } else {
-            view.setBackgroundColor(0x00000000); // שקוף
+            view.setBackgroundColor(0x00000000);
             icon.setVisibility(View.GONE);
         }
 
