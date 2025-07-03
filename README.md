@@ -20,13 +20,9 @@ It provides a modern, touch-friendly UI for playing, seeking, and visualizing au
 ## 📷 Screenshots & Video
 
 ### 📸 Screenshots
-<p float="left">
-  <img src="screenshots/screenshot1.png" width="300"/>
-  <img src="screenshots/screenshot2.png" width="300"/>
-  <img src="screenshots/screenshot3.png" width="300"/>
-</p>
+![image](https://github.com/user-attachments/assets/e53f913c-5d36-4bd5-9810-428c95c1e27f)
+![image](https://github.com/user-attachments/assets/0b56d1bb-2aa1-4d4b-b01b-be3423b601c1)
 
-> 📁 Put your screenshots in a `screenshots/` folder in your repo.
 
 ### 🎥 Demo Video
 
