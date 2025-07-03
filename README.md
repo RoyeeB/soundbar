@@ -21,7 +21,7 @@ It provides a modern, touch-friendly UI for playing, seeking, and visualizing au
 
 ### 📸 Screenshots
 ![image](https://github.com/user-attachments/assets/988f507d-c07d-4b25-a2d0-1820576cd33a)
-![image](https://github.com/user-attachments/assets/0b56d1bb-2aa1-4d4b-b01b-be3423b601c1)
+![image](https://github.com/user-attachments/assets/08fb1abf-b96f-48a2-b8ba-b906e13f6dfd)
 ![image](https://github.com/user-attachments/assets/7108ad7d-ed95-4092-8c5a-a1e6ae3e8367)
 
 
