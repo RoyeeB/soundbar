@@ -1,11 +1,8 @@
 package com.example.soundbarlib;
 
 import android.content.Context;
-import android.graphics.Canvas;
-import android.graphics.LinearGradient;
-import android.graphics.Paint;
-import android.graphics.Path;
-import android.graphics.Shader;
+import android.content.res.TypedArray;
+import android.graphics.*;
 import android.media.MediaMetadataRetriever;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
@@ -29,6 +26,7 @@ public class SoundBarPlayerView extends View {
     private float durationInSeconds = 0f;
     private boolean isSeeking = false;
     private float seekX = 0f;
+    private int barColor = Color.parseColor("#00E676"); // ברירת מחדל
 
     public interface OnSeekListener {
         void onSeekTo(float percent);
@@ -36,15 +34,21 @@ public class SoundBarPlayerView extends View {
 
     public SoundBarPlayerView(Context context) {
         super(context);
-        init();
+        init(null);
     }
 
     public SoundBarPlayerView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        init();
+        init(attrs);
     }
 
-    private void init() {
+    private void init(AttributeSet attrs) {
+        if (attrs != null) {
+            TypedArray a = getContext().obtainStyledAttributes(attrs, R.styleable.SoundBarPlayerView);
+            barColor = a.getColor(R.styleable.SoundBarPlayerView_barColor, barColor);
+            a.recycle();
+        }
+
         gradientPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         gradientPaint.setStyle(Paint.Style.FILL);
 
@@ -54,8 +58,8 @@ public class SoundBarPlayerView extends View {
 
         glowPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         glowPaint.setStyle(Paint.Style.FILL);
-        glowPaint.setColor(0x4400E676);
-        glowPaint.setMaskFilter(new android.graphics.BlurMaskFilter(10, android.graphics.BlurMaskFilter.Blur.NORMAL));
+        glowPaint.setColor(applyAlpha(barColor, 0.27f)); // glow מתוך אותו צבע
+        glowPaint.setMaskFilter(new BlurMaskFilter(10, BlurMaskFilter.Blur.NORMAL));
 
         timePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         timePaint.setColor(0xFF333333);
@@ -73,6 +77,17 @@ public class SoundBarPlayerView extends View {
         bubbleTextPaint.setFakeBoldText(true);
 
         setLayerType(LAYER_TYPE_SOFTWARE, null);
+    }
+
+    public void setBarColor(int color) {
+        this.barColor = color;
+        glowPaint.setColor(applyAlpha(color, 0.27f));
+        invalidate();
+    }
+
+    private int applyAlpha(int color, float alpha) {
+        int alphaVal = Math.round(Color.alpha(color) * alpha);
+        return Color.argb(alphaVal, Color.red(color), Color.green(color), Color.blue(color));
     }
 
     public void loadAudio(File file) {
@@ -142,9 +157,14 @@ public class SoundBarPlayerView extends View {
             canvas.drawRoundRect(left, top, left + barWidth, bottom, 6f, 6f, backgroundPaint);
         }
 
+        // Gradient צבעוני לפי הצבע שנבחר
         LinearGradient gradient = new LinearGradient(
                 0, 0, width, 0,
-                new int[]{0xFF00E676, 0xFF1DE9B6, 0xFF00BFA5},
+                new int[]{
+                        lightenColor(barColor, 0.4f),
+                        barColor,
+                        darkenColor(barColor, 0.2f)
+                },
                 null,
                 Shader.TileMode.CLAMP
         );
@@ -214,5 +234,20 @@ public class SoundBarPlayerView extends View {
                 return true;
         }
         return false;
+    }
+
+    // פונקציות עזר לצבעים
+    private int lightenColor(int color, float factor) {
+        int r = Math.min(255, (int)(Color.red(color) + 255 * factor));
+        int g = Math.min(255, (int)(Color.green(color) + 255 * factor));
+        int b = Math.min(255, (int)(Color.blue(color) + 255 * factor));
+        return Color.rgb(r, g, b);
+    }
+
+    private int darkenColor(int color, float factor) {
+        int r = Math.max(0, (int)(Color.red(color) * (1 - factor)));
+        int g = Math.max(0, (int)(Color.green(color) * (1 - factor)));
+        int b = Math.max(0, (int)(Color.blue(color) * (1 - factor)));
+        return Color.rgb(r, g, b);
     }
 }

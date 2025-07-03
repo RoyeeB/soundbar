@@ -1,5 +1,6 @@
 package com.example.soundbar;
 
+import android.graphics.Color;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
@@ -29,6 +30,13 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Button colorButton1 = findViewById(R.id.colorButton1);
+        Button colorButton2 = findViewById(R.id.colorButton2);
+        Button colorButton3 = findViewById(R.id.colorButton3);
+        colorButton1.setOnClickListener(v -> soundBarView.setBarColor(Color.parseColor("#FFEB3B"))); // ירוק
+        colorButton2.setOnClickListener(v -> soundBarView.setBarColor(Color.parseColor("#E91E63"))); // ורוד
+        colorButton3.setOnClickListener(v -> soundBarView.setBarColor(Color.parseColor("#2196F3"))); // כחול
+
 
         soundBarView = findViewById(R.id.soundBarView);
         playPauseBtn = findViewById(R.id.playButton);
