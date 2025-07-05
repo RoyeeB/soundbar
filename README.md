@@ -27,10 +27,9 @@ It provides a modern, touch-friendly UI for playing, seeking, and visualizing au
 
 
 ### 🎥 Demo Video
+Link for Google Drive:
 
-[![Watch Demo](https://img.youtube.com/vi/VIDEO_ID_HERE/0.jpg)](https://www.youtube.com/watch?v=VIDEO_ID_HERE)
-
-> Replace `VIDEO_ID_HERE` with your actual YouTube video ID.
+https://drive.google.com/file/d/1Mb1x8wsu2fmoDBCssf_kcyXUvKUAZDu5/view?usp=drive_link
 
 ---
 
